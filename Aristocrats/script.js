@@ -110,6 +110,9 @@ fetchQuote().then(() => {
             case ":":
                 document.getElementById("quoteBox").innerHTML += "<span class = 'symbol'>:</span>";
                 continue;
+            case ";":
+                document.getElementById("quoteBox").innerHTML += "<span class = 'symbol'>;</span>";
+                continue;
             default:
                 // For letters, create a span with the ciphered text
                 break;
