@@ -14,5 +14,5 @@ fetch('https://api.quotable.io/random')
 
 var length = quote.length;
 for (var i = 0; i < length; i++) {
-    document.getElementById("quoteBox").innerHTML += "<span class = 'letter'><button id = 'letterBox'>H</button></span>";
+    document.getElementById("quoteBox").innerHTML += "<button class='letter'>" + quote[i] + "</button>";
 }
