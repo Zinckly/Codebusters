@@ -32,9 +32,15 @@ document.addEventListener('click', function (e) {
 
 document.addEventListener('keydown', function (e) {
     if (!lastClickedButton) return;
-    const key = e.key.toUpperCase();
-    if (key.length === 1 && key >= 'A' && key <= 'Z') {
-        lastClickedButton.textContent = key;
+    const key = e.key;
+    if (key === 'Delete' || key === 'Backspace') {
+        console.log("deleting");
+        lastClickedButton.innerHTML = "<p></p>";
+        return;
+    }
+    const upperKey = key.toUpperCase();
+    if (upperKey.length === 1 && upperKey >= 'A' && upperKey <= 'Z') {
+        lastClickedButton.innerHTML = "<p>" + upperKey + "</p>";
         checkWin();
     }
 });
@@ -60,9 +66,11 @@ fetchQuote().then(() => {
     var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     var cipherText = scramble(alphabet);
 
+    document.getElementById("quoteBox").innerHTML = "<div class = 'word'>";
+
     for (var i = 0; i < ee; i++) {
         if (quote[i] === " ") {
-            document.getElementById("quoteBox").innerHTML += "<span class = 'space'></span>";
+            document.getElementById("quoteBox").innerHTML += "</div><div class = 'word'>";
             continue;
         }
         switch (quote[i]) {
@@ -96,7 +104,16 @@ fetchQuote().then(() => {
             case "‘":
                 document.getElementById("quoteBox").innerHTML += "<span class = 'symbol'>‘</span>";
                 continue;
-            
-        document.getElementById("quoteBox").innerHTML += "<span class = 'cipherText'><p>" + cipherText[alphabet.indexOf(quote[i])] + "</p><button></button></span>";
+            case "’":
+                document.getElementById("quoteBox").innerHTML += "<span class = 'symbol'>’</span>";
+                continue;
+            case ":":
+                document.getElementById("quoteBox").innerHTML += "<span class = 'symbol'>:</span>";
+                continue;
+            default:
+                // For letters, create a span with the ciphered text
+                break;
+        }
+        document.getElementById("quoteBox").innerHTML += "<span class = 'cipherText'><p>" + cipherText[alphabet.indexOf(quote[i])] + "</p><button class = 'letterBox'></button></span>";
     }
 });
