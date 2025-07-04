@@ -60,8 +60,7 @@ document.addEventListener('click', function (e) {
     if (e.target.tagName === 'BUTTON') {
         lastClickedButton = e.target;
         lastClickedButton.focus();
-    }
-    if (e.target.id !== 'toggle' && e.target.tagName !== 'INPUT') {
+    } else if (e.target.id !== 'toggle' && e.target.tagName !== 'INPUT') {
         document.getElementById(0).focus();
     }
 });
