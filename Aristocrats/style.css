@@ -1,3 +1,4 @@
+
 p {
     margin: 0;
     padding: 0;
@@ -25,12 +26,13 @@ table {
     padding: 30px;
     border-radius: 10px;
     border: 2px solid #ccc;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     width: 70%;
+    overflow: auto;
 }
 .cipherText {
     display: inline-block;
-    font-size: 35px;
+    font-size: 40px;
     font-family: 'Courier New', Courier, monospace;
     color: #333;
     margin: 5px;
@@ -38,10 +40,10 @@ table {
     margin-bottom:0px;
 }
 .letterBox {
-    width: 21px;
+    width: 25px;
     height: 35px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    background-color: white;
+    border: 2px solid #ccc;
     border-radius: 5px;
     cursor:text;
     display: inline-block;
@@ -62,14 +64,30 @@ table {
     margin-right: 30px;
     display: inline-block;
     overflow: hidden;
+    /*background-color: #f0f0f0;*/
+    border-radius: 10px;
 }
 #quoteBox {
     width: 70%;
     padding: 30px;
-    background-color: #b5fff5;
+    background-color: white;
     border: 2px solid #ccc;
     border-radius: 10px;
     margin: 40px auto;
     display: block;
     margin-top: 5%;
+    margin-top: 40px;
+}
+#time {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+    width: 300px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    padding: 10px;
 }

@@ -16,7 +16,41 @@ function checkWin() {
     });
     cleanQuote = quote.replace(/ /g, "").replace(/\.|,|\?|!|'|-|—|“|”|‘|’|:|;/g, "");
     if (answerText === cleanQuote) {
-        alert("you won");
+        stopTimer();
+        if (autoReload()) {
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        }
+    }
+}
+
+function autoReload() {
+    console.log("autoReload called");
+    const toggle = document.getElementById("toggle");
+    console.log(toggle.checked);
+    if (toggle.checked) {
+        localStorage.setItem("autoReload", "true");
+    } else {
+        localStorage.setItem("autoReload", "false");
+    }
+    return toggle.checked;
+}
+
+let minute = 0;
+let second = 0;
+function updateTime() {
+    second++;
+    if (second >= 60) {
+        second = 0;
+        minute++;
+    }
+    document.getElementById("minute").innerText = String(minute).padStart(2, '0');
+    document.getElementById("second").innerText = String(second).padStart(2, '0');
+}
+function stopTimer() {
+    if (window.timerInterval) {
+        clearInterval(window.timerInterval);
     }
 }
 
@@ -93,6 +127,10 @@ async function fetchQuote() {
 }
 fetchQuote().then(() => {
 
+    if (localStorage.getItem("autoReload") === "true") {
+        document.getElementById("toggle").checked = true;
+    }
+
     var ee = quote.length;
     var cipher = "";
 
@@ -161,5 +199,7 @@ fetchQuote().then(() => {
             document.getElementById(id).innerHTML = count;
         }
     }
+
+    window.timerInterval = setInterval(updateTime, 1000);
 
 });
