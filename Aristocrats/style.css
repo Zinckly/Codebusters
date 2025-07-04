@@ -19,6 +19,9 @@ table {
     margin-left: auto;
     margin-right: auto;
 }
+.symbol {
+    font-size: 45px;
+}
 #frequencies {
     margin-left: auto;
     margin-right: auto;
