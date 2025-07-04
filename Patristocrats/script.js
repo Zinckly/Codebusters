@@ -62,53 +62,56 @@ document.addEventListener('click', function (e) {
         lastClickedButton.focus();
     }
     if (e.target.id !== 'toggle' && e.target.tagName !== 'INPUT') {
-        document.getElementById(0).focus();
+        document.getElementById(1).focus();
     }
 });
 
 document.addEventListener('keydown', function (e) {
 
-    var spaceCount = 0;
-    for (let i = 0; i < quote.length; i++) {
-        if (quote[i] === " " || quote[i] === "." || quote[i] === "," || quote[i] === "?" || quote[i] === "!" || quote[i] === "'" || quote[i] === "-" || quote[i] === "—" || quote[i] === "“" || quote[i] === "”" || quote[i] === "‘" || quote[i] === "’" || quote[i] === ":" || quote[i] === ";") {
-            spaceCount++;
-        }
-    }
-
     const lastClickedButton = document.activeElement;
+
+    const idd = parseInt(lastClickedButton.id, 10);
+
     if (!lastClickedButton) return;
     const key = e.key;
     if (key === 'Delete' || key === 'Backspace') {
         console.log("deleting");
         lastClickedButton.innerHTML = "<p></p>";
-        document.getElementById((parseInt(lastClickedButton.id, 10) + 1) % (quote.length - spaceCount)).focus();
+        document.getElementById((idd + 1) % (quote.length)).focus();
         return;
     }
     if (key === 'Right' || key === 'ArrowRight') {
-        const id = lastClickedButton.id;
-        document.getElementById((parseInt(id, 10) + 1) % (quote.length - spaceCount)).focus();
+        if (idd === quote.length) {
+            document.getElementById(1).focus();
+            return;
+        }
+        document.getElementById(idd + 1).focus();
         return;
     }
     if (key === 'Left' || key === 'ArrowLeft') {
-        const id = lastClickedButton.id;
-        document.getElementById((parseInt(id, 10) - 1 + (quote.length - spaceCount)) % (quote.length - spaceCount)).focus();
+        if (idd === 1) {
+            document.getElementById(quote.length).focus();
+            return;
+        }
+        document.getElementById(idd - 1).focus();
         return;
     }
     const upperKey = key.toUpperCase();
     if (upperKey.length === 1 && upperKey >= 'A' && upperKey <= 'Z') {
         lastClickedButton.innerHTML = "<p>" + upperKey + "</p>";
 
-        // Find the next empty button after the current one
-        let nextId = (parseInt(lastClickedButton.id, 10) + 1) % (quote.length - spaceCount);
-        let nextBtn = document.getElementById(nextId);
-        let startId = nextId;
-        while (nextBtn && nextBtn.innerText !== "" && nextId !== parseInt(lastClickedButton.id, 10)) {
-            nextId = (nextId + 1) % (quote.length - spaceCount);
-            nextBtn = document.getElementById(nextId);
-            if (nextId === startId) break; // Prevent infinite loop
-        }
-        if (nextBtn && nextBtn.innerText === "") {
-            nextBtn.focus();
+        // Find the next empty button after the current one (1-based IDs)
+        let currentId = parseInt(lastClickedButton.id, 10);
+        let total = quote.length;
+        let found = false;
+        for (let offset = 1; offset <= total; offset++) {
+            let nextId = ((currentId - 1 + offset) % total) + 1;
+            let nextBtn = document.getElementById(nextId);
+            if (nextBtn && nextBtn.innerText === "") {
+                nextBtn.focus();
+                found = true;
+                break;
+            }
         }
         checkWin();
     }
@@ -122,6 +125,8 @@ async function fetchQuote() {
         const data = await response.json();
         console.log(`"${data.content}" — ${data.author}`);
         quote = data.content.toUpperCase();
+        quote = quote.replace(/ /g, "").replace(/\.|,|\?|!|'|-|—|“|”|‘|’|:|;/g, "");
+        console.log("quote: " + quote);
         author = data.author;
     } catch (error) {
         console.error('Error fetching quote:', error);
@@ -133,8 +138,6 @@ fetchQuote().then(() => {
     if (localStorage.getItem("autoReload") === "true") {
         document.getElementById("toggle").checked = true;
     }
-
-    var ee = quote.length;
     var cipher = "";
 
     var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
@@ -142,35 +145,24 @@ fetchQuote().then(() => {
 
     let quoteBoxHTML = "";
 
-    var spaceCount = 0;
-
     let inWord = false;
 
-    for (let i = 0; i < ee; i++) {
+    for (let i = 0; i < quote.length; i++) {
         const char = quote[i];
-
-        if (char === " ") {
+    
+        if (i % 5 === 0) {
             if (inWord) {
-                spaceCount++;
                 quoteBoxHTML += "</div>";
                 inWord = false;
             }
-            continue;
         }
-
+    
         if (!inWord) {
             quoteBoxHTML += "<div class='word'>";
             inWord = true;
         }
-
-        // Handle punctuation
-        if (".,?!'—“”‘’:;-".includes(char)) {
-            quoteBoxHTML += `<span class='symbol'>${char}</span>`;
-            spaceCount++;
-        } else {
-            cipher += cipherText[alphabet.indexOf(char)];
-            quoteBoxHTML += `<span class='cipherText'><p>${cipherText[alphabet.indexOf(char)]}</p><button class='letterBox' id='${i - spaceCount}'></button></span>`;
-        }
+        cipher += cipherText[alphabet.indexOf(char)];
+        quoteBoxHTML += `<span class='cipherText'><p>${cipherText[alphabet.indexOf(char)]}</p><button class='letterBox' id='${i + 1}'></button></span>`;
     }
 
     console.log("cipher: " + cipher);

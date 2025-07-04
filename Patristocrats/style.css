@@ -1,0 +1,96 @@
+
+p {
+    margin: 0;
+    padding: 0;
+}
+button {
+    height:35px;
+    width: 21px;
+}
+td, th {
+    border: 1px solid #000000;
+}
+td, input {
+    width: 15px;
+    height: 15px;
+    text-align: center;
+}
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+.symbol {
+    font-size: 45px;
+}
+#frequencies {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    background-color: #ffffff;
+    width: 70%;
+    overflow: auto;
+}
+.cipherText {
+    display: inline-block;
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+    margin: 5px;
+    margin-top:0px;
+    margin-bottom:0px;
+}
+.letterBox {
+    width: 25px;
+    height: 35px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor:text;
+    display: inline-block;
+    text-align: center;
+    font-size:15px;
+    line-height: 30px;
+    vertical-align: top;
+    padding: 2px;
+}
+.letterBox:focus {
+    animation: fadeIn 0.3s ease-in-out;
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+.word {
+    flex-wrap: nowrap;
+    margin-right: 30px;
+    display: inline-block;
+    overflow: hidden;
+    /*background-color: #f0f0f0;*/
+    border-radius: 10px;
+}
+#quoteBox {
+    width: 70%;
+    padding: 30px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin: 40px auto;
+    display: block;
+    margin-top: 5%;
+    margin-top: 40px;
+}
+#time {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+    width: 300px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    padding: 10px;
+}
