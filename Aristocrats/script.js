@@ -44,6 +44,7 @@ document.addEventListener('keydown', function (e) {
     if (key === 'Delete' || key === 'Backspace') {
         console.log("deleting");
         lastClickedButton.innerHTML = "<p></p>";
+        document.getElementById((parseInt(lastClickedButton.id, 10) + 1) % (quote.length - spaceCount)).focus();
         return;
     }
     if (key === 'Right' || key === 'ArrowRight') {
@@ -60,12 +61,18 @@ document.addEventListener('keydown', function (e) {
     if (upperKey.length === 1 && upperKey >= 'A' && upperKey <= 'Z') {
         lastClickedButton.innerHTML = "<p>" + upperKey + "</p>";
 
-        var repeated = 0;
-        while (document.getElementById((parseInt(lastClickedButton.id, 10) + 1 + repeated) % (quote.length - spaceCount)).innerText !== "" && repeated < quote.length - spaceCount) {
-            repeated++;
+        // Find the next empty button after the current one
+        let nextId = (parseInt(lastClickedButton.id, 10) + 1) % (quote.length - spaceCount);
+        let nextBtn = document.getElementById(nextId);
+        let startId = nextId;
+        while (nextBtn && nextBtn.innerText !== "" && nextId !== parseInt(lastClickedButton.id, 10)) {
+            nextId = (nextId + 1) % (quote.length - spaceCount);
+            nextBtn = document.getElementById(nextId);
+            if (nextId === startId) break; // Prevent infinite loop
         }
-
-        document.getElementById((parseInt(lastClickedButton.id, 10) + 1 + repeated) % (quote.length - spaceCount)).focus();
+        if (nextBtn && nextBtn.innerText === "") {
+            nextBtn.focus();
+        }
         checkWin();
     }
 });
@@ -102,6 +109,7 @@ fetchQuote().then(() => {
 
         if (char === " ") {
             if (inWord) {
+                spaceCount++;
                 quoteBoxHTML += "</div>";
                 inWord = false;
             }
@@ -114,7 +122,7 @@ fetchQuote().then(() => {
         }
 
         // Handle punctuation
-        if (".,?!'—“”‘’:;".includes(char)) {
+        if (".,?!'—“”‘’:;-".includes(char)) {
             quoteBoxHTML += `<span class='symbol'>${char}</span>`;
             spaceCount++;
         } else {
