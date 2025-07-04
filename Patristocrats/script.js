@@ -14,7 +14,7 @@ function checkWin() {
     buttons.forEach(button => {
         answerText += button.innerText;
     });
-    cleanQuote = quote.replace(/ /g, "").replace(/\.|,|\?|!|'|-|—|“|”|‘|’|:|;/g, "");
+    cleanQuote = quote.replace(/ /g, "").replace(/\.|,|\?|!|'|-|—|“|”|‘|’|:|;|0|1|2|3|4|5|6|7|8|9/g, "");
     if (answerText === cleanQuote) {
         stopTimer();
         if (autoReload()) {
@@ -160,6 +160,7 @@ fetchQuote().then(() => {
             quoteBoxHTML += "<div class='word'>";
             inWord = true;
         }
+
         cipher += cipherText[alphabet.indexOf(char)];
         quoteBoxHTML += `<span class='cipherText'><p>${cipherText[alphabet.indexOf(char)]}</p><button class='letterBox' id='${i + 1}'></button></span>`;
     }

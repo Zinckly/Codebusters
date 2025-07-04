@@ -163,7 +163,7 @@ fetchQuote().then(() => {
         }
 
         // Handle punctuation
-        if (".,?!'—“”‘’:;-".includes(char)) {
+        if (".,?!'—“”‘’:;-0123456789".includes(char)) {
             quoteBoxHTML += `<span class='symbol'>${char}</span>`;
             spaceCount++;
         } else {
