@@ -2,7 +2,7 @@ function scramble(arr) {
     arr = arr.slice(); // Create a copy of the array to avoid modifying the original
     console.log("scrambling");
     for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+        var j = Math.floor(Math.random() * (i + 1));
         // Ensure no element stays in the same position
         if (j === i) {
             // Pick a different index if j == i
