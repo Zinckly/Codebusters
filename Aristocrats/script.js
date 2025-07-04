@@ -73,7 +73,7 @@ document.addEventListener('click', function (e) {
     if (e.target.tagName === 'BUTTON') {
         lastClickedButton = e.target;
         lastClickedButton.focus();
-    } else if (e.target.id !== 'toggle' && e.target.tagName !== 'INPUT') {
+    } else if (e.target.id !== 'toggle' && e.target.tagName !== 'INPUT' && e.target.getElementsByClassName('cipherText').length === 0) {
         document.getElementById(0).focus();
     }
 });
