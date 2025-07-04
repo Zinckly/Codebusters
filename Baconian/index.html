@@ -20,15 +20,21 @@
         <button id="reset" onclick="reset()">Reset</button>
         <button id="home" onclick="location.href = '/Codebusters'">Home</button>
     </div>
-    <div id="time">
-        <span class="digits" id="minute">
-            00
-        </span>
-        <span class="text">:</span>
-        <span class="digits" id="second">
-            00
-        </span>
-        <span class="text"></span>
+    <div id = "top">
+        <div id="time">
+            <span class="digits" id="minute">
+                00
+            </span>
+            <span class="text">:</span>
+            <span class="digits" id="second">
+                00
+            </span>
+            <span class="text"></span>
+        </div>
+        <div id="key">
+            <button id = "keyButton" onclick = "toggleKey()">Key</button>
+            <div id="keyBox"><img src = "BaconTable.png" width = "600px" height = "150px"></div>
+        </div>
     </div>
     <div id="quoteBox"></div>
 </body>

@@ -57,6 +57,17 @@ function stopTimer() {
     }
 }
 
+function toggleKey() {
+    console.log("toggleKey called");
+    const keyBox = document.getElementById("keyBox");
+    const display = window.getComputedStyle(keyBox).display;
+    if (display === "none") {
+        keyBox.style.display = "block";
+    } else {
+        keyBox.style.display = "none";
+    }
+}
+
 let lastClickedButton = null;
 
 document.addEventListener('click', function (e) {
