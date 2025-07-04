@@ -94,6 +94,7 @@ async function fetchQuote() {
 fetchQuote().then(() => {
 
     var ee = quote.length;
+    var cipher = "";
 
     var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     var cipherText = scramble(alphabet);
@@ -126,9 +127,12 @@ fetchQuote().then(() => {
             quoteBoxHTML += `<span class='symbol'>${char}</span>`;
             spaceCount++;
         } else {
+            cipher += cipherText[alphabet.indexOf(char)];
             quoteBoxHTML += `<span class='cipherText'><p>${cipherText[alphabet.indexOf(char)]}</p><button class='letterBox' id='${i - spaceCount}'></button></span>`;
         }
     }
+
+    console.log("cipher: " + cipher);
 
     // Close any open word div at the end
     if (inWord) {
@@ -144,4 +148,18 @@ fetchQuote().then(() => {
             firstButton.focus();
         }
     }, 0);
+
+    for (let i = 0; i < 26; i++) {
+        var id = alphabet[i];
+        var count = 0;
+        for (let j = 0; j < cipher.length; j++) {
+            if (cipher[j] === id) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            document.getElementById(id).innerHTML = count;
+        }
+    }
+
 });
