@@ -78,12 +78,14 @@ document.addEventListener('click', function (e) {
     if (e.target.tagName === 'BUTTON') {
         lastClickedButton = e.target;
         lastClickedButton.focus();
-    } else if (e.target.id !== 'toggle' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'P') {
-        document.getElementById(0).focus();
     }
 });
 
 document.addEventListener('keydown', function (e) {
+
+    if (document.activeElement.classList.contains('letterBox') === false) {
+        return;
+    }
 
     const lastClickedButton = document.activeElement;
 

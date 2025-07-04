@@ -1,0 +1,144 @@
+body, html {
+    margin: 0px;
+    padding: 0px;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+    display: inline-block;
+    padding: 0px;
+    margin: 10px;
+}
+#toggle, #toggleText {
+    align-items: center;
+    vertical-align: middle;
+}
+#toggle {
+    width: 40px;
+    height: 20px;
+    appearance: none;
+    background: #ccc;
+    outline: none;
+    border-radius: 20px;
+    position: relative;
+    transition: background 0.3s;
+    cursor: pointer;
+}
+#toggle:checked {
+    background: #007bff;
+}
+#toggle::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+#toggle:checked::before {
+    transform: translateX(20px);
+}
+#toggleText {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    margin-left: 10px;
+    vertical-align: middle;
+    user-select: none;
+    display: inline-block;
+}
+#reset, #home {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    width: auto;
+    margin: 10px;
+    float: right;
+}
+#header {
+    margin: none;
+    background-color: #9cb7fa;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 0 0 16px 16px;
+}
+#time {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+    width: 300px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    padding: 10px;
+}
+#quoteBox {
+    width: 70%;
+    padding: 30px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin: 40px auto;
+    display: block;
+    margin-top: 5%;
+    margin-top: 40px;
+}
+.cipherText {
+    display: inline-block;
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+    margin: 5px;
+    margin-top:0px;
+    margin-bottom:0px;
+}
+.letterBox {
+    width: 25px;
+    height: 35px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor:text;
+    display: inline-block;
+    text-align: center;
+    font-size:15px;
+    line-height: 30px;
+    vertical-align: top;
+    padding: 2px;
+    position: relative;
+    top: 50%;
+    transform: translateX(190%);
+}
+.letterBox:focus {
+    animation: fadeIn 0.3s ease-in-out;
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+.word {
+    flex-wrap: nowrap;
+    margin-right: 30px;
+    display: inline-block;
+    overflow: hidden;
+    /*background-color: #f0f0f0;*/
+    border-radius: 10px;
+}

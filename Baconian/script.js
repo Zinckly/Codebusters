@@ -1,18 +1,3 @@
-function scramble(arr) {
-    arr = arr.slice(); // Create a copy of the array to avoid modifying the original
-    console.log("scrambling");
-    for (let i = arr.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        // Ensure no element stays in the same position
-        if (j === i) {
-            // Pick a different index if j == i
-            j = (j + 1) % (i + 1);
-        }
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-}
-
 function checkWin() {
     const buttons = document.getElementsByClassName('letterBox');
     var answerText = "";
@@ -86,6 +71,7 @@ document.addEventListener('keydown', function (e) {
     if (document.activeElement.classList.contains('letterBox') === false) {
         return;
     }
+
     var spaceCount = 0;
     for (let i = 0; i < quote.length; i++) {
         if (quote[i] === " " || quote[i] === "." || quote[i] === "," || quote[i] === "?" || quote[i] === "!" || quote[i] === "'" || quote[i] === "-" || quote[i] === "—" || quote[i] === "“" || quote[i] === "”" || quote[i] === "‘" || quote[i] === "’" || quote[i] === ":" || quote[i] === ";") {
@@ -152,11 +138,13 @@ fetchQuote().then(() => {
         document.getElementById("toggle").checked = true;
     }
 
+    quote = quote.replace(/ /g, "").replace(/\.|,|\?|!|'|-|—|“|”|‘|’|:|;|0|1|2|3|4|5|6|7|8|9/g, "");
+
     var ee = quote.length;
     var cipher = "";
 
     var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-    var cipherText = scramble(alphabet);
+    var cipherText = ["AAAAA", "AAAAB", "AAABA", "AAABB", "AABAA", "AABAB", "AABBA", "AABBB", "ABAAA", "ABAAA", "ABAAB", "ABABA", "ABABB", "ABBAA", "ABBAB", "ABBBA", "ABBBB", "BAAAA", "BAAAB", "BAABA", "BAABB", "BAABB", "BABAA", "BABAB", "BABBA", "BABBB"];
 
     let quoteBoxHTML = "";
 
@@ -207,19 +195,6 @@ fetchQuote().then(() => {
             firstButton.focus();
         }
     }, 0);
-
-    for (let i = 0; i < 26; i++) {
-        var id = alphabet[i];
-        var count = 0;
-        for (let j = 0; j < cipher.length; j++) {
-            if (cipher[j] === id) {
-                count++;
-            }
-        }
-        if (count > 0) {
-            document.getElementById(id).innerHTML = count;
-        }
-    }
 
     window.timerInterval = setInterval(updateTime, 1000);
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Baconian Cipher</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <link rel="icon" href="/Codebusters/icon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div id = "header">
+        <h1>Baconian</h1>
+        <label class = "switch">
+            <input type="checkbox" onclick = "autoReload()" id="toggle">
+            <span class="slider"></span>
+            <span id="toggleText" onclick = "autoReload()">Auto Reload</span>
+        </label>
+        <button id="reset" onclick="reset()">Reset</button>
+        <button id="home" onclick="location.href = '/Codebusters'">Home</button>
+    </div>
+    <div id="time">
+        <span class="digits" id="minute">
+            00
+        </span>
+        <span class="text">:</span>
+        <span class="digits" id="second">
+            00
+        </span>
+        <span class="text"></span>
+    </div>
+    <div id="quoteBox"></div>
+</body>
+</html>
