@@ -17,6 +17,7 @@ function checkWin() {
     cleanQuote = quote.replace(/ /g, "").replace(/\.|,|\?|!|'|-|—|“|”|‘|’|:|;/g, "");
     if (answerText === cleanQuote) {
         stopTimer();
+        document.getElementById("time").style.color = "green";
         if (autoReload()) {
             setTimeout(() => {
                 location.reload();
