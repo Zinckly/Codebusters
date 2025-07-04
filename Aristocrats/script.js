@@ -9,15 +9,17 @@ function scramble(arr) {
 }
 
 function checkWin() {
-    const buttons = document.querySelectorAll('button');
+    const buttons = document.getElementsByClassName('letterBox');
     var answerText = "";
-    buttons.forEach(button => {
+    for (let i = 0; i < buttons.length; i++) {
+        const button = buttons[i];
         answerText += button.innerText;
-    });
-    cleanQuote = quote.replace(/ /g, "").replace(/\.|,|\?|!|'|-|—|“|”|‘|’|:|;/g, "");
+    }
+    cleanQuote = quote.replace(/ /g, "").replace(/\.|,|\?|!|'|-|—|“|”|‘|’|:|;|0|1|2|3|4|5|6|7|8|9/g, "");
     if (answerText === cleanQuote) {
         stopTimer();
         document.getElementById("time").style.color = "green";
+        document.getElementById("time").style.fontWeight = "bold";
         if (autoReload()) {
             setTimeout(() => {
                 location.reload();
