@@ -26,6 +26,16 @@ function checkWin() {
     }
 }
 
+function reset() {
+    const buttons = document.getElementsByClassName('letterBox');
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].innerHTML = "<p></p>";
+    }
+    setTimeout(() => {
+        document.getElementById(0).focus();
+    }, 100);
+}
+
 function autoReload() {
     console.log("autoReload called");
     const toggle = document.getElementById("toggle");

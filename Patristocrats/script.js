@@ -26,6 +26,16 @@ function checkWin() {
     }
 }
 
+function reset() {
+    const buttons = document.getElementsByClassName('letterBox');
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].innerHTML = "<p></p>";
+    }
+    setTimeout(() => {
+        document.getElementById("1").focus();
+    }, 100);
+}
+
 function autoReload() {
     console.log("autoReload called");
     const toggle = document.getElementById("toggle");
@@ -177,7 +187,7 @@ fetchQuote().then(() => {
 
     // Focus on the first button after all buttons are rendered
     setTimeout(() => {
-        const firstButton = document.getElementById("0");
+        const firstButton = document.getElementById("1");
         if (firstButton) {
             firstButton.focus();
         }

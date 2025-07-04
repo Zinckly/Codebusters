@@ -11,11 +11,14 @@
 
 <body>
     <div id = "header">
+        <h1>Patristocrats</h1>
         <label class = "switch">
             <input type="checkbox" onclick = "autoReload()" id="toggle">
             <span class="slider"></span>
-            <span class="text" onclick = "autoReload()">Auto Reload</span>
+            <span id="toggleText" onclick = "autoReload()">Auto Reload</span>
         </label>
+        <button id="reset" onclick="reset()">Reset</button>
+        <button id="home" onclick="location.href = '/Codebusters'">Home</button>
     </div>
     <div id="time">
         <span class="digits" id="minute">
